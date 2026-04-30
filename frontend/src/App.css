@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+}
+
+.navbar {
+  background: rgba(17, 24, 39, 0.95);
+  color: white;
+  padding: 18px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar div {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.navbar h2 {
+  margin: 0;
+}
+
+.navbar a {
+  color: white;
+  margin-left: 22px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #93c5fd;
+}
+
+.page {
+  padding: 35px;
+}
+
+.page h1 {
+  color: white;
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.card {
+  background: white;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.card h3 {
+  color: #374151;
+}
+
+.card h1 {
+  color: #2563eb;
+  font-size: 40px;
+}
+
+input {
+  padding: 13px;
+  width: 300px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: #f3f4f6;
+}
+
+button {
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.badge {
+  padding: 7px 14px;
+  border-radius: 20px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-weight: bold;
+}
+
+.form-card {
+  max-width: 420px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.project-card {
+  border-left: 6px solid #2563eb;
+}
+
+.task-card {
+  border-left: 6px solid #7c3aed;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.dropbtn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  background: #f3f4f6;
+  color: #111827;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: white;
+  min-width: 200px;
+  box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dropdown-content div {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  background: #e0e7ff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
