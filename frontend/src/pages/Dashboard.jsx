@@ -12,13 +12,21 @@ function Dashboard() {
     window.location.href = "/";
   };
 
-  const getData = async () => {
-    const projectRes = await axios.get(`${API}/api/projects`);
-    const taskRes = await axios.get(`${API}/api/tasks`);
+ const getData = async () => {
+  const token = localStorage.getItem("token");
 
-    setProjects(projectRes.data);
-    setTasks(taskRes.data);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
+
+  const projectRes = await axios.get(`${API}/api/projects`, config);
+  const taskRes = await axios.get(`${API}/api/tasks`, config);
+
+  setProjects(projectRes.data);
+  setTasks(taskRes.data);
+};
 
   useEffect(() => {
     const token = localStorage.getItem("token");

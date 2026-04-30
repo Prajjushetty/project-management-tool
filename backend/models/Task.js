@@ -7,7 +7,15 @@ const taskSchema = new mongoose.Schema({
     type: String,
     default: "To-Do"
   },
-  deadline: Date
+  deadline: Date,
+  projectId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project"
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 module.exports = mongoose.model("Task", taskSchema);

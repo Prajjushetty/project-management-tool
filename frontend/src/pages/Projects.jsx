@@ -11,10 +11,22 @@ function Projects() {
   const [editDescription, setEditDescription] = useState("");
   const [editStatus, setEditStatus] = useState("");
 
-  const getProjects = async () => {
-    const res = await axios.get("https://project-management-tool-3842.onrender.com/api/projects");
-    setProjects(res.data);
+ const getProjects = async () => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
+
+  const res = await axios.get(
+    "https://project-management-tool-3842.onrender.com/api/projects",
+    config
+  );
+
+  setProjects(res.data);
+};
 
   const addProject = async () => {
     if (!name || !description) {
@@ -22,11 +34,23 @@ function Projects() {
       return;
     }
 
-    await axios.post("https://project-management-tool-3842.onrender.com/api/projects", {
-      name,
-      description,
-      status: "Active"
-    });
+   const token = localStorage.getItem("token");
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
+
+await axios.post(
+  "https://project-management-tool-3842.onrender.com/api/projects",
+  {
+    name,
+    description,
+    status: "Active"
+  },
+  config
+);
 
     alert("Project added");
     setName("");
@@ -34,11 +58,23 @@ function Projects() {
     getProjects();
   };
 
-  const deleteProject = async (id) => {
-    await axios.delete(`https://project-management-tool-3842.onrender.com/api/projects/${id}`);
-    alert("Project deleted");
-    getProjects();
+const deleteProject = async (id) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
+
+  await axios.delete(
+    `https://project-management-tool-3842.onrender.com/api/projects/${id}`,
+    config
+  );
+
+  alert("Project deleted");
+  getProjects();
+};
 
   const startEdit = (project) => {
     setEditId(project._id);
@@ -48,11 +84,23 @@ function Projects() {
   };
 
   const updateProject = async () => {
-    await axios.put(`https://project-management-tool-3842.onrender.com/api/projects/${editId}`, {
-      name: editName,
-      description: editDescription,
-      status: editStatus
-    });
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+
+    await axios.put(
+      `https://project-management-tool-3842.onrender.com/api/projects/${editId}`,
+      {
+        name: editName,
+        description: editDescription,
+        status: editStatus
+      },
+      config
+    );
 
     alert("Project updated");
     setEditId(null);

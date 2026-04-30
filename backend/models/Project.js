@@ -7,7 +7,11 @@ const projectSchema = new mongoose.Schema({
     type: String,
     default: "Active"
   },
-  deadline: Date
+  deadline: Date,
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
 });
 
 module.exports = mongoose.model("Project", projectSchema);

@@ -17,15 +17,31 @@ function Tasks() {
 
   const API = "https://project-management-tool-3842.onrender.com";
 
-  const getTasks = async () => {
-    const res = await axios.get(`${API}/api/tasks`);
-    setTasks(res.data);
+const getTasks = async () => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
 
-  const getProjects = async () => {
-    const res = await axios.get(`${API}/api/projects`);
-    setProjects(res.data);
+  const res = await axios.get(`${API}/api/tasks`, config);
+  setTasks(res.data);
+};
+
+const getProjects = async () => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
+
+  const res = await axios.get(`${API}/api/projects`, config);
+  setProjects(res.data);
+};
 
   const addTask = async () => {
     if (!title || !description || !projectId) {
@@ -33,13 +49,24 @@ function Tasks() {
       return;
     }
 
-    await axios.post(`${API}/api/tasks`, {
-      title,
-      description,
-      status: "To-Do",
-      projectId
-    });
+  const token = localStorage.getItem("token");
 
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
+
+await axios.post(
+  `${API}/api/tasks`,
+  {
+    title,
+    description,
+    status: "To-Do",
+    projectId
+  },
+  config
+);
     alert("Task added");
     setTitle("");
     setDescription("");
@@ -47,11 +74,20 @@ function Tasks() {
     getTasks();
   };
 
-  const deleteTask = async (id) => {
-    await axios.delete(`${API}/api/tasks/${id}`);
-    alert("Task deleted");
-    getTasks();
+ const deleteTask = async (id) => {
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   };
+
+  await axios.delete(`${API}/api/tasks/${id}`, config);
+
+  alert("Task deleted");
+  getTasks();
+};
 
   const startEdit = (task) => {
     setEditId(task._id);
@@ -62,12 +98,24 @@ function Tasks() {
   };
 
   const updateTask = async () => {
-    await axios.put(`${API}/api/tasks/${editId}`, {
-      title: editTitle,
-      description: editDescription,
-      status: editStatus,
-      projectId: editProjectId
-    });
+   const token = localStorage.getItem("token");
+
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+};
+
+await axios.put(
+  `${API}/api/tasks/${editId}`,
+  {
+    title: editTitle,
+    description: editDescription,
+    status: editStatus,
+    projectId: editProjectId
+  },
+  config
+);
 
     alert("Task updated");
     setEditId(null);
