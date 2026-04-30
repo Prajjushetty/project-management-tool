@@ -19,8 +19,11 @@ function Register() {
 
       alert(res.data.message);
 
-      // 🔥 redirect to login after register
-      window.location.href = "/";
+// remove old logged-in user token
+localStorage.removeItem("token");
+
+// go to login page
+window.location.href = "/";
 
     } catch (error) {
       alert(error.response?.data?.message || "Error in registration");
