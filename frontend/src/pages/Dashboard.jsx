@@ -5,14 +5,16 @@ function Dashboard() {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
 
+  const API = "https://project-management-tool-3842.onrender.com";
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
   };
 
   const getData = async () => {
-    const projectRes = await axios.get("http://localhost:5000/api/projects");
-    const taskRes = await axios.get("http://localhost:5000/api/tasks");
+    const projectRes = await axios.get(`${API}/api/projects`);
+    const taskRes = await axios.get(`${API}/api/tasks`);
 
     setProjects(projectRes.data);
     setTasks(taskRes.data);
