@@ -12,7 +12,7 @@ function Projects() {
   const [editStatus, setEditStatus] = useState("");
 
   const getProjects = async () => {
-    const res = await axios.get("http://localhost:5000/api/projects");
+    const res = await axios.get("https://project-management-tool-3842.onrender.com/api/projects");
     setProjects(res.data);
   };
 
@@ -22,7 +22,7 @@ function Projects() {
       return;
     }
 
-    await axios.post("http://localhost:5000/api/projects", {
+    await axios.post("https://project-management-tool-3842.onrender.com/api/projects", {
       name,
       description,
       status: "Active"
@@ -35,7 +35,7 @@ function Projects() {
   };
 
   const deleteProject = async (id) => {
-    await axios.delete(`http://localhost:5000/api/projects/${id}`);
+    await axios.delete(`https://project-management-tool-3842.onrender.com/api/projects/${id}`);
     alert("Project deleted");
     getProjects();
   };
