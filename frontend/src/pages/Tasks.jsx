@@ -15,13 +15,15 @@ function Tasks() {
   const [editStatus, setEditStatus] = useState("");
   const [editProjectId, setEditProjectId] = useState("");
 
+  const API = "https://project-management-tool-3842.onrender.com";
+
   const getTasks = async () => {
-    const res = await axios.get("http://localhost:5000/api/tasks");
+    const res = await axios.get(`${API}/api/tasks`);
     setTasks(res.data);
   };
 
   const getProjects = async () => {
-    const res = await axios.get("http://localhost:5000/api/projects");
+    const res = await axios.get(`${API}/api/projects`);
     setProjects(res.data);
   };
 
@@ -31,7 +33,7 @@ function Tasks() {
       return;
     }
 
-    await axios.post("http://localhost:5000/api/tasks", {
+    await axios.post(`${API}/api/tasks`, {
       title,
       description,
       status: "To-Do",
@@ -46,7 +48,7 @@ function Tasks() {
   };
 
   const deleteTask = async (id) => {
-    await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+    await axios.delete(`${API}/api/tasks/${id}`);
     alert("Task deleted");
     getTasks();
   };
@@ -60,7 +62,7 @@ function Tasks() {
   };
 
   const updateTask = async () => {
-    await axios.put(`https://project-management-tool-3842.onrender.com/api/tasks/${editId}`, {
+    await axios.put(`${API}/api/tasks/${editId}`, {
       title: editTitle,
       description: editDescription,
       status: editStatus,
@@ -113,21 +115,21 @@ function Tasks() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-       <div className="dropdown">
-  <button className="dropbtn">
-    {projectId
-      ? projects.find((p) => p._id === projectId)?.name
-      : "Select Project"}
-  </button>
+          <div className="dropdown">
+            <button className="dropbtn">
+              {projectId
+                ? projects.find((p) => p._id === projectId)?.name
+                : "Select Project"}
+            </button>
 
-  <div className="dropdown-content">
-    {projects.map((project) => (
-      <div key={project._id} onClick={() => setProjectId(project._id)}>
-        {project.name}
-      </div>
-    ))}
-  </div>
-</div>
+            <div className="dropdown-content">
+              {projects.map((project) => (
+                <div key={project._id} onClick={() => setProjectId(project._id)}>
+                  {project.name}
+                </div>
+              ))}
+            </div>
+          </div>
 
           <br />
           <button onClick={addTask}>Add Task</button>
